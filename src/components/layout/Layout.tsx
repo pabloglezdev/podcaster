@@ -11,7 +11,7 @@ const Layout: FC<LayoutProps> = (props) => {
     <div>
       <Header title="Podcaster" />
       <Divider />
-      {children}
+      <main className="mx-4">{children}</main>
     </div>
   );
 };

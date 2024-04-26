@@ -1,3 +1,20 @@
+import { type Podcast, type RawPodcast } from '../types/podcast';
+
+const getParsedPodcasts = (podcasts: RawPodcast[]) =>
+  podcasts.map(
+    (podcast) =>
+      ({
+        ...podcast,
+        artist: podcast['im:artist'],
+        contentType: podcast['im:contentType'],
+        image: podcast['im:image'],
+        name: podcast['im:name'],
+        price: podcast['im:price'],
+        releaseDate: podcast['im:releaseDate'],
+        summary: podcast['im:summary']
+      }) as Podcast
+  );
+
 export const getPodcasts = async (limit: number) =>
   await fetch(`https://itunes.apple.com/us/rss/toppodcasts/limit=${limit}/genre=1310/json`)
     .then((response) => {
@@ -6,7 +23,8 @@ export const getPodcasts = async (limit: number) =>
       }
       throw new Error(`Network response was not ok with code ${response.status}}`);
     })
-    .then((data) => data);
+    .then((data) => data.feed.entry as RawPodcast[])
+    .then((rawPodcasts) => getParsedPodcasts(rawPodcasts));
 
 export const getPodcastDetails = async (id: string) =>
   await fetch(
