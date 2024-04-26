@@ -1,9 +1,7 @@
+import Layout from './components/layout/Layout';
+
 function App() {
-  return (
-    <>
-      <h4>Podcaster</h4>
-    </>
-  );
+  return <Layout />;
 }
 
 export default App;
