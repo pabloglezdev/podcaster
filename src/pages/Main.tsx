@@ -1,6 +1,7 @@
 import { useEffect, useState, type FC } from 'react';
 import { getPodcasts } from '../services/podcast';
 import { type Podcast } from '../types/podcast';
+import CardList from '../components/card/CardList';
 
 const Main: FC = () => {
   const [podcasts, setPodcasts] = useState<Podcast[]>([]);
@@ -13,13 +14,7 @@ const Main: FC = () => {
     fetchPodcasts();
   }, []);
 
-  return (
-    <main>
-      {podcasts.map((podcast) => (
-        <div>{podcast.title.label}</div>
-      ))}
-    </main>
-  );
+  return <CardList cards={podcasts} />;
 };
 
 export default Main;

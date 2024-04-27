@@ -11,20 +11,28 @@ import './index.css';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Main />
+    element: (
+      <Layout>
+        <Main />
+      </Layout>
+    )
   },
   {
     path: 'podcast/:podcastId',
-    element: <PodcastDetail />
+    element: (
+      <Layout>
+        <PodcastDetail />
+      </Layout>
+    )
   },
   {
     path: '/podcast/:podcastId/episode/:episodeId',
-    element: <EpisodeDetail />
+    element: (
+      <Layout>
+        <EpisodeDetail />
+      </Layout>
+    )
   }
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Layout>
-    <RouterProvider router={router} />
-  </Layout>
-);
+ReactDOM.createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);
