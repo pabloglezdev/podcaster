@@ -2,9 +2,11 @@ import { useEffect, useState, type FC } from 'react';
 import { getPodcasts } from '../services/podcast';
 import { type Podcast } from '../types/podcast';
 import CardList from '../components/card/CardList';
+import Search from '../components/search/Search';
 
 const Main: FC = () => {
-  const [podcasts, setPodcasts] = useState<Podcast[]>([]);
+  const [initialPodcasts, setInitialPodcasts] = useState<Podcast[]>([]);
+  const [filteredPodcasts, setFilteredPodcasts] = useState<Podcast[]>([]);
 
   useEffect(() => {
     const lastFetchedAt = localStorage.getItem('podcasts-fetched-at');
@@ -28,20 +30,36 @@ const Main: FC = () => {
       if (data) {
         localStorage.setItem('podcasts-fetched-at', new Date().toISOString());
         localStorage.setItem('podcasts', JSON.stringify(data));
-        setPodcasts(data);
+        setInitialPodcasts(data);
+        setFilteredPodcasts(data);
       }
     };
 
     const cachedPodcasts = localStorage.getItem('podcasts');
     if (cachedPodcasts) {
-      setPodcasts(JSON.parse(cachedPodcasts));
+      setInitialPodcasts(JSON.parse(cachedPodcasts));
+      setFilteredPodcasts(JSON.parse(cachedPodcasts));
       return;
     }
 
     fetchPodcasts();
   }, []);
 
-  return <CardList cards={podcasts} />;
+  const handleSearch = (query: string) => {
+    const filteredPodcasts = initialPodcasts.filter(
+      (podcast: Podcast) =>
+        podcast.name.label.toLowerCase().includes(query.toLowerCase()) ||
+        podcast.artist.label.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredPodcasts(filteredPodcasts);
+  };
+
+  return (
+    <>
+      <Search count={filteredPodcasts.length} onSearch={handleSearch} />
+      <CardList cards={filteredPodcasts} />
+    </>
+  );
 };
 
 export default Main;
