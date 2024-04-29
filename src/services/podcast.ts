@@ -1,4 +1,4 @@
-import { type Podcast, type RawPodcast } from '../types/podcast';
+import { type EpisodeDetail, type Podcast, type RawPodcast } from '../types/podcast';
 
 const getParsedPodcasts = (podcasts: RawPodcast[]) =>
   podcasts.map(
@@ -26,7 +26,7 @@ export const getPodcasts = async (limit: number) =>
     .then((data) => data.feed.entry as RawPodcast[])
     .then((rawPodcasts) => getParsedPodcasts(rawPodcasts));
 
-export const getPodcastDetails = async (id: string) =>
+export const getEpisodeDetails = async (id: string) =>
   await fetch(
     `https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${id}&media=podcast &entity=podcastEpisode&limit=20`)}`
   )
@@ -36,4 +36,5 @@ export const getPodcastDetails = async (id: string) =>
       }
       throw new Error(`Network response was not ok with code ${response.status}}`);
     })
-    .then((data) => JSON.parse(data.contents));
+    .then((data) => JSON.parse(data.contents))
+    .then((data) => data.results as EpisodeDetail[]);

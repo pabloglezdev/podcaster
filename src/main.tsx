@@ -2,9 +2,9 @@ import ReactDOM from 'react-dom/client';
 import Layout from './components/layout/Layout.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Main from './pages/Main.tsx';
-import PodcastDetail from './pages/PodcastDetail.tsx';
-import EpisodeDetail from './pages/EpisodeDetail.tsx';
+import Main from './pages/MainPage.tsx';
+import PodcastDetail from './pages/PodcastDetailPage.tsx';
+import EpisodeDetail from './pages/EpisodeDetailPage.tsx';
 
 import './index.css';
 

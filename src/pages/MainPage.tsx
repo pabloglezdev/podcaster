@@ -4,7 +4,7 @@ import { type Podcast } from '../types/podcast';
 import CardList from '../components/card/CardList';
 import Search from '../components/search/Search';
 
-const Main: FC = () => {
+const MainPage: FC = () => {
   const [initialPodcasts, setInitialPodcasts] = useState<Podcast[]>([]);
   const [filteredPodcasts, setFilteredPodcasts] = useState<Podcast[]>([]);
 
@@ -25,6 +25,13 @@ const Main: FC = () => {
   }, []);
 
   useEffect(() => {
+    const cachedPodcasts = localStorage.getItem('podcasts');
+    if (cachedPodcasts) {
+      setInitialPodcasts(JSON.parse(cachedPodcasts));
+      setFilteredPodcasts(JSON.parse(cachedPodcasts));
+      return;
+    }
+
     const fetchPodcasts = async () => {
       const data = await getPodcasts(100);
       if (data) {
@@ -34,14 +41,6 @@ const Main: FC = () => {
         setFilteredPodcasts(data);
       }
     };
-
-    const cachedPodcasts = localStorage.getItem('podcasts');
-    if (cachedPodcasts) {
-      setInitialPodcasts(JSON.parse(cachedPodcasts));
-      setFilteredPodcasts(JSON.parse(cachedPodcasts));
-      return;
-    }
-
     fetchPodcasts();
   }, []);
 
@@ -62,4 +61,4 @@ const Main: FC = () => {
   );
 };
 
-export default Main;
+export default MainPage;
