@@ -18,11 +18,11 @@ const PodcastDetailPage: FC = () => {
       const diffInHours = diff / 1000 / 60 / 60;
 
       if (diffInHours > 24) {
-        localStorage.removeItem('podcasts-fetched-at');
-        localStorage.removeItem('podcasts');
+        localStorage.removeItem(`podcast-detail-${podcastId}-fetched-at`);
+        localStorage.removeItem(`podcast-detail-${podcastId}`);
       }
     }
-  }, []);
+  }, [podcastId]);
 
   useEffect(() => {
     if (!podcastId) {
@@ -39,7 +39,7 @@ const PodcastDetailPage: FC = () => {
     const fetchPodcastDetail = async () => {
       const data = await getPodcastDetail(podcastId);
       if (data) {
-        localStorage.setItem('podcast-detail-fetched-at', new Date().toISOString());
+        localStorage.setItem(`podcast-detail-${podcastId}-fetched-at`, new Date().toISOString());
         localStorage.setItem(`podcast-detail-${podcastId}`, JSON.stringify(data));
         setPodcastDetail(data);
       }
