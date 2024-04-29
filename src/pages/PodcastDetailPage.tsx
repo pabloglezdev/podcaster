@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPodcastDetails } from '../services/podcast';
+import { getPodcastDetail } from '../services/podcast';
 import { type EpisodeDetail } from '../types/podcast';
 
 const PodcastDetailPage: FC = () => {
@@ -37,7 +37,7 @@ const PodcastDetailPage: FC = () => {
     }
 
     const fetchPodcastDetail = async () => {
-      const data = await getPodcastDetails(podcastId);
+      const data = await getPodcastDetail(podcastId);
       if (data) {
         localStorage.setItem('podcast-detail-fetched-at', new Date().toISOString());
         localStorage.setItem(`podcast-detail-${podcastId}`, JSON.stringify(data));
