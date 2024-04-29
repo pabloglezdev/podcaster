@@ -55,10 +55,10 @@ const Main: FC = () => {
   };
 
   return (
-    <>
+    <section id="podcasts">
       <Search count={filteredPodcasts.length} onSearch={handleSearch} />
       <CardList cards={filteredPodcasts} />
-    </>
+    </section>
   );
 };
 

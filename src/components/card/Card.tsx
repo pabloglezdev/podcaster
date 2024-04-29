@@ -17,6 +17,7 @@ const Card: FC<CardProps> = (props) => {
 
   return (
     <div
+      id="card"
       className="w-full border border-gray-200 rounded-sm shadow-[0px_5px_5px_0px] shadow-gray-200 relative inline-flex flex-col items-center h-auto max-h-[200px] p-1 mb-10 cursor-pointer"
       onClick={handleClick}
     >

@@ -5,9 +5,9 @@ const EpisodeDetail: FC = () => {
   const { podcastId, episodeId } = useParams();
 
   return (
-    <div>
+    <section id="episode-detail">
       EpisodeDetail {podcastId} {episodeId}
-    </div>
+    </section>
   );
 };
 

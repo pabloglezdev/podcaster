@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 const PodcastDetail: FC = () => {
   const { podcastId } = useParams();
 
-  return <div>PodcastDetail {podcastId}</div>;
+  return <section id="podcast-detail">PodcastDetail {podcastId}</section>;
 };
 
 export default PodcastDetail;

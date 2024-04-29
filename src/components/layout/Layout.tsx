@@ -8,7 +8,7 @@ const Layout: FC<LayoutProps> = (props) => {
   const { children } = props;
 
   return (
-    <div>
+    <div id="app" className="relative h-screen flex flex-col items-stretch">
       <Header title="Podcaster" />
       <Divider />
       <main className="mx-4">{children}</main>
