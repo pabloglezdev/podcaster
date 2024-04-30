@@ -9,12 +9,12 @@ const getRowClassName = (index: number) =>
     'bg-gray-200': index % 2 === 0
   });
 
-type TableProps = {
+type EpisodesTableProps = {
   podcastDetail: Array<EpisodeDetail>;
   onRowClick: (episode: EpisodeDetail) => void;
 };
 
-const Table: FC<TableProps> = (props) => {
+const EpisodesTable: FC<EpisodesTableProps> = (props) => {
   const { podcastDetail, onRowClick } = props;
 
   const handleRowClick = (episode: EpisodeDetail) => onRowClick(episode);
@@ -39,4 +39,4 @@ const Table: FC<TableProps> = (props) => {
   );
 };
 
-export default Table;
+export default EpisodesTable;
