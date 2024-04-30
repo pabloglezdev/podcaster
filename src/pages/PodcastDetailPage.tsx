@@ -2,7 +2,7 @@ import { useEffect, useState, type FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { type EpisodeDetail } from '../types/podcast';
 import { getPodcastDetail } from '../services/podcast';
-import EpisodesTable from '../components/table/EpisodesTable';
+import EpisodeTable from '../components/table/EpisodeTable';
 
 const PodcastDetailPage: FC = () => {
   const { podcastId } = useParams();
@@ -68,7 +68,7 @@ const PodcastDetailPage: FC = () => {
         )}
         {podcastDetail && (
           <div id="table-container" className="p-2 shadow-[0px_2px_5px_0px] shadow-gray-400 rounded-sm">
-            <EpisodesTable podcastDetail={podcastDetail} onRowClick={handleRowClick} />
+            <EpisodeTable podcastDetail={podcastDetail} onRowClick={handleRowClick} />
           </div>
         )}
       </section>

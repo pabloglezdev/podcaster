@@ -1,20 +1,13 @@
 import { type FC } from 'react';
-import classNames from 'classnames';
 import { type EpisodeDetail } from '../../types/podcast';
 import { convertMillisecondsToHours, getDateOnly } from '../../utils/date';
 
-const getRowClassName = (index: number) =>
-  classNames({
-    'cursor-pointer': true,
-    'bg-gray-200': index % 2 === 0
-  });
-
-type EpisodesTableProps = {
+type EpisodeTableProps = {
   podcastDetail: Array<EpisodeDetail>;
   onRowClick: (episode: EpisodeDetail) => void;
 };
 
-const EpisodesTable: FC<EpisodesTableProps> = (props) => {
+const EpisodesTable: FC<EpisodeTableProps> = (props) => {
   const { podcastDetail, onRowClick } = props;
 
   const handleRowClick = (episode: EpisodeDetail) => onRowClick(episode);
@@ -28,8 +21,10 @@ const EpisodesTable: FC<EpisodesTableProps> = (props) => {
       </thead>
       <tbody>
         {podcastDetail.map((episode, index) => (
-          <tr key={index} className={getRowClassName(index)} onClick={() => handleRowClick(episode)}>
-            <td>{episode.trackName}</td>
+          <tr key={index} className="odd:bg-gray-50">
+            <td className="text-cyan-700" onClick={() => handleRowClick(episode)}>
+              {episode.trackName}
+            </td>
             <td>{getDateOnly(episode.releaseDate)}</td>
             <td>{convertMillisecondsToHours(episode.trackTimeMillis)}</td>
           </tr>
