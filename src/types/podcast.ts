@@ -106,5 +106,5 @@ export type Podcast = {
   title: PodcastTitle;
 };
 
-// PodcastDetail types are not equal on every object, so no contract is defined to avoid possible errors
+// PodcastDetail types are not equal on every object, so no contract is defined to avoid possible errors.
 export type EpisodeDetail = Record<string, string>;

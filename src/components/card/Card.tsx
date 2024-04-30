@@ -18,7 +18,7 @@ const Card: FC<CardProps> = (props) => {
   return (
     <div
       id="card"
-      className="w-full border border-gray-200 rounded-sm shadow-[0px_5px_5px_0px] shadow-gray-200 relative inline-flex flex-col items-center h-auto max-h-[200px] p-1 mb-10 cursor-pointer"
+      className="w-full border border-gray-200 rounded-sm shadow-[0px_2px_5px_0px] shadow-gray-400 relative inline-flex flex-col items-center h-auto max-h-[200px] p-2 mb-10 cursor-pointer"
       onClick={handleClick}
     >
       <picture className="absoulte top-0 left-0 -translate-y-8">

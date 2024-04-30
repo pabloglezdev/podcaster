@@ -1,12 +1,16 @@
 import { useEffect, useState, type FC } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getPodcastDetail } from '../services/podcast';
 import { type EpisodeDetail } from '../types/podcast';
+import Table from '../components/table/Table';
 
 const PodcastDetailPage: FC = () => {
   const { podcastId } = useParams();
 
+  const navigate = useNavigate();
+
   const [podcastDetail, setPodcastDetail] = useState<Array<EpisodeDetail>>([]);
+  const [episodesCount, setEpisodeCount] = useState<number>();
 
   useEffect(() => {
     const lastFetchedAt = localStorage.getItem('podcasts-fetched-at');
@@ -32,31 +36,43 @@ const PodcastDetailPage: FC = () => {
 
     const cachedPodcastsDetail = localStorage.getItem(`podcast-detail-${podcastId}`);
     if (cachedPodcastsDetail) {
-      setPodcastDetail(JSON.parse(cachedPodcastsDetail));
+      const { data, count } = JSON.parse(cachedPodcastsDetail);
+      setPodcastDetail(data);
+      setEpisodeCount(count);
       return;
     }
 
     const fetchPodcastDetail = async () => {
-      const data = await getPodcastDetail(podcastId);
+      const { data, count } = await getPodcastDetail(podcastId);
       if (data) {
         localStorage.setItem(`podcast-detail-${podcastId}-fetched-at`, new Date().toISOString());
-        localStorage.setItem(`podcast-detail-${podcastId}`, JSON.stringify(data));
+        localStorage.setItem(`podcast-detail-${podcastId}`, JSON.stringify({ data, count }));
         setPodcastDetail(data);
+        setEpisodeCount(count);
       }
     };
     fetchPodcastDetail();
   }, [podcastId]);
 
+  const handleRowClick = (episode: EpisodeDetail) =>
+    navigate(`/podcast/${podcastId}/episode/${episode.trackId}`, { state: { episode } });
+
   return (
-    <section id="podcast-detail">
-      {podcastDetail && (
-        <ul>
-          {podcastDetail.map((episode) => (
-            <li>{episode.trackName}</li>
-          ))}
-        </ul>
-      )}
-    </section>
+    <div id="podcast" className="relative flex gap-4">
+      <aside id="podcast-detail" className="w-[350px] shadow-[0px_2px_5px_0px] shadow-gray-400 p-2 rounded-sm">
+        Sidebar
+      </aside>
+      <section id="episodes-list" className="flex flex-col flex-1 gap-4">
+        {episodesCount && (
+          <h3 className="text-xl shadow-[0px_2px_5px_0px] shadow-gray-400 p-2 rounded-sm">Episodes: {episodesCount}</h3>
+        )}
+        {podcastDetail && (
+          <div id="table-container" className="p-2 shadow-[0px_2px_5px_0px] shadow-gray-400 rounded-sm">
+            <Table podcastDetail={podcastDetail} onRowClick={handleRowClick} />
+          </div>
+        )}
+      </section>
+    </div>
   );
 };
 

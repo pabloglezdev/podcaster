@@ -37,4 +37,4 @@ export const getPodcastDetail = async (id: string) =>
       throw new Error(`Network response was not ok with code ${response.status}}`);
     })
     .then((data) => JSON.parse(data.contents))
-    .then((data) => data.results as EpisodeDetail[]);
+    .then((data) => ({ data: data.results as EpisodeDetail[], count: data.resultCount - 1 })); // Seems like first entry is related to general podcast detail

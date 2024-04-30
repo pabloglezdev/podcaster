@@ -14,7 +14,7 @@ const Search: FC<SearchProps> = (props) => {
     <div id="search" className="flex justify-end items-center gap-4 h-12">
       <div className="bg-blue-600 text-white rounded-lg px-1">{count}</div>
       <input
-        className="border pl-2 w-[250px] rounded-sm shadow-sm"
+        className="border p-1 pl-2 w-[250px] rounded-sm shadow-sm"
         type="text"
         placeholder="Filter podcasts..."
         onChange={handleSearch}
