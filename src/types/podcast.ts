@@ -83,11 +83,11 @@ export type RawPodcast = {
   'im:name': PodcastName;
   'im:price': PodcastPrice;
   'im:releaseDate': PodcastReleaseDate;
-  'im:summary': PodcastSummary;
   category: PodcastCategory;
   id: PodcastId;
   link: PodcastLink;
   rights: PodcastRights;
+  summary: PodcastSummary;
   title: PodcastTitle;
 };
 

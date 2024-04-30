@@ -10,8 +10,7 @@ const getParsedPodcasts = (podcasts: RawPodcast[]) =>
         image: podcast['im:image'],
         name: podcast['im:name'],
         price: podcast['im:price'],
-        releaseDate: podcast['im:releaseDate'],
-        summary: podcast['im:summary']
+        releaseDate: podcast['im:releaseDate']
       }) as Podcast
   );
 
