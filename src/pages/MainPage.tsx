@@ -1,10 +1,13 @@
 import { useEffect, useState, type FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getPodcasts } from '../services/podcast';
 import { type Podcast } from '../types/podcast';
 import CardList from '../components/card/CardList';
 import Search from '../components/search/Search';
 
 const MainPage: FC = () => {
+  const navigate = useNavigate();
+
   const [initialPodcasts, setInitialPodcasts] = useState<Podcast[]>([]);
   const [filteredPodcasts, setFilteredPodcasts] = useState<Podcast[]>([]);
 
@@ -53,10 +56,13 @@ const MainPage: FC = () => {
     setFilteredPodcasts(filteredPodcasts);
   };
 
+  const handleClick = (podcast: Podcast) =>
+    navigate(`/podcast/${podcast.id.attributes['im:id']}`, { state: { podcast: podcast as Podcast } });
+
   return (
     <section id="podcasts">
       <Search count={filteredPodcasts.length} onSearch={handleSearch} />
-      <CardList cards={filteredPodcasts} />
+      <CardList cards={filteredPodcasts} onClick={handleClick} />
     </section>
   );
 };

@@ -1,11 +1,18 @@
 import { useEffect, useState, type FC } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { type EpisodeDetail } from '../types/podcast';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { type Podcast, type EpisodeDetail } from '../types/podcast';
 import { getPodcastDetail } from '../services/podcast';
 import EpisodeTable from '../components/table/EpisodeTable';
+import EpisodeSidebar from '../components/sidebar/EpisodeSidebar';
+
+type PodcastDetailLocationState = {
+  podcast: Podcast;
+};
 
 const PodcastDetailPage: FC = () => {
   const { podcastId } = useParams();
+  const location = useLocation();
+  const { podcast } = location.state as PodcastDetailLocationState;
 
   const navigate = useNavigate();
 
@@ -60,7 +67,12 @@ const PodcastDetailPage: FC = () => {
   return (
     <div id="podcast" className="relative flex gap-4">
       <aside id="podcast-detail" className="w-[350px] shadow-[0px_2px_5px_0px] shadow-gray-400 p-2 rounded-sm">
-        Sidebar
+        <EpisodeSidebar
+          title={podcast.name.label}
+          artist={podcast.artist.label}
+          cover={podcast.image[0]?.label}
+          description={podcast.summary.label}
+        />
       </aside>
       <section id="episodes-list" className="flex flex-col flex-1 gap-4">
         {episodesCount && (

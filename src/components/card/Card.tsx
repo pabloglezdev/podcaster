@@ -1,19 +1,16 @@
 import { type FC } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 type CardProps = {
-  id: string;
   title: string;
   image: string;
   artist: string;
+  onClick: () => void;
 };
 
 const Card: FC<CardProps> = (props) => {
-  const { id, title, image, artist } = props;
+  const { title, image, artist, onClick } = props;
 
-  const navigate = useNavigate();
-
-  const handleClick = () => navigate(`/podcast/${id}`);
+  const handleClick = () => onClick();
 
   return (
     <div

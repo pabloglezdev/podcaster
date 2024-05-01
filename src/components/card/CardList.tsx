@@ -4,10 +4,13 @@ import Card from './Card';
 
 type CardsListProps = {
   cards: Podcast[];
+  onClick: (podcast: Podcast) => void;
 };
 
 const CardsList: FC<CardsListProps> = (props) => {
-  const { cards } = props;
+  const { cards, onClick } = props;
+
+  const handleClick = (podcast: Podcast) => onClick(podcast);
 
   // BUG When there are two grid rows, the row height is not respected.
   return (
@@ -15,10 +18,10 @@ const CardsList: FC<CardsListProps> = (props) => {
       {cards.map((podcast) => (
         <div key={podcast.id.attributes['im:id']} className="h-auto w-full">
           <Card
-            id={podcast.id.attributes['im:id']}
             title={podcast.name.label}
             image={podcast.image[0]?.label}
             artist={podcast.artist.label}
+            onClick={() => handleClick(podcast)}
           />
         </div>
       ))}

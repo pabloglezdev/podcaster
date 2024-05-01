@@ -27,7 +27,7 @@ export const getPodcasts = async (limit: number) =>
 
 export const getPodcastDetail = async (id: string) =>
   await fetch(
-    `https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${id}&media=podcast &entity=podcastEpisode&limit=20`)}`
+    `https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`)}`
   )
     .then((response) => {
       if (response.ok) {

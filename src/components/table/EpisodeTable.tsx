@@ -13,15 +13,15 @@ const EpisodesTable: FC<EpisodeTableProps> = (props) => {
   const handleRowClick = (episode: EpisodeDetail) => onRowClick(episode);
 
   return (
-    <table className="h-full w-full border-separate border-spacing-y-3">
-      <thead className="text-left">
+    <table className="h-full w-full">
+      <thead className="text-left h-10">
         <th>Title</th>
         <th>Date</th>
         <th>Duration</th>
       </thead>
       <tbody>
         {podcastDetail.map((episode, index) => (
-          <tr key={index} className="odd:bg-gray-50">
+          <tr key={index} className="odd:bg-gray-50 h-10 border-t-2">
             <td className="text-cyan-700" onClick={() => handleRowClick(episode)}>
               {episode.trackName}
             </td>
