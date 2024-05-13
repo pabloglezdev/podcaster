@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Main from './pages/MainPage.tsx';
 import PodcastDetail from './pages/PodcastDetailPage.tsx';
-import EpisodeDetail from './pages/EpisodeDetailPage.tsx';
+import EpisodeDetailPage from './pages/EpisodeDetailPage.tsx';
 
 import './index.css';
 
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     path: '/podcast/:podcastId/episode/:episodeId',
     element: (
       <Layout>
-        <EpisodeDetail />
+        <EpisodeDetailPage />
       </Layout>
     )
   }

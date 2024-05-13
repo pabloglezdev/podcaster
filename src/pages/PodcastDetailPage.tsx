@@ -3,14 +3,17 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { type Podcast, type EpisodeDetail } from '../types/podcast';
 import { getPodcastDetail } from '../services/podcast';
 import EpisodeTable from '../components/table/EpisodeTable';
-import EpisodeSidebar from '../components/sidebar/EpisodeSidebar';
+import PodcastSidebar from '../components/sidebar/PodcastSidebar';
+import SidebarWrapper from '../components/sidebar/SidebarWrapper';
 
-type PodcastDetailLocationState = {
+export type PodcastDetailLocationState = {
   podcast: Podcast;
 };
 
 const PodcastDetailPage: FC = () => {
   const { podcastId } = useParams();
+
+  // Check if podcast is not null. If it is, fetch the data again.
   const location = useLocation();
   const { podcast } = location.state as PodcastDetailLocationState;
 
@@ -62,27 +65,27 @@ const PodcastDetailPage: FC = () => {
   }, [podcastId]);
 
   const handleRowClick = (episode: EpisodeDetail) =>
-    navigate(`/podcast/${podcastId}/episode/${episode.trackId}`, { state: { episode } });
+    navigate(`/podcast/${podcastId}/episode/${episode.trackId}`, { state: { podcast, episode } });
 
   return (
-    <div id="podcast" className="relative flex gap-4">
-      <aside id="podcast-detail" className="w-[350px] shadow-[0px_2px_5px_0px] shadow-gray-400 p-2 rounded-sm">
-        <EpisodeSidebar
+    <div id="podcast" className="relative grid grid-flow-col gap-10">
+      <SidebarWrapper>
+        <PodcastSidebar
           title={podcast.name.label}
           artist={podcast.artist.label}
-          cover={podcast.image[0]?.label}
+          cover={podcast.image[1].label}
           description={podcast.summary.label}
         />
-      </aside>
+      </SidebarWrapper>
       <section id="episodes-list" className="flex flex-col flex-1 gap-4">
-        {episodesCount && (
+        {episodesCount ? (
           <h3 className="text-xl shadow-[0px_2px_5px_0px] shadow-gray-400 p-2 rounded-sm">Episodes: {episodesCount}</h3>
-        )}
-        {podcastDetail && (
+        ) : null}
+        {podcastDetail.length ? (
           <div id="table-container" className="p-2 shadow-[0px_2px_5px_0px] shadow-gray-400 rounded-sm">
             <EpisodeTable podcastDetail={podcastDetail} onRowClick={handleRowClick} />
           </div>
-        )}
+        ) : null}
       </section>
     </div>
   );

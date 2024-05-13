@@ -11,7 +11,7 @@ const Layout: FC<LayoutProps> = (props) => {
     <div id="app" className="relative h-screen flex flex-col items-stretch">
       <Header title="Podcaster" />
       <Divider />
-      <main className="mx-4 mt-4">{children}</main>
+      <main className="p-4">{children}</main>
     </div>
   );
 };
