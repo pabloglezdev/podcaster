@@ -11,15 +11,13 @@ type EpisodeDetailLocationState = PodcastDetailLocationState & {
 };
 
 const EpisodeDetailPage: FC = () => {
-  const { podcastId, episodeId } = useParams();
+  const { podcastId } = useParams();
 
   const navigate = useNavigate();
 
-  // Check if podcast is not null. If it is, fetch the data again.
+  // TODO Check if podcast is not null. If it is, fetch the data again.
   const location = useLocation();
   const { podcast, episode } = location.state as EpisodeDetailLocationState;
-
-  console.log(episode);
 
   const handlePodcastClick = () => navigate(`/podcast/${podcastId}`, { state: { podcast } });
 
