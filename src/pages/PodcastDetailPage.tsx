@@ -68,7 +68,7 @@ const PodcastDetailPage: FC = () => {
     navigate(`/podcast/${podcastId}/episode/${episode.trackId}`, { state: { podcast, episode } });
 
   return (
-    <div id="podcast" className="relative grid grid-flow-col gap-10">
+    <div id="podcast-page" className="relative grid grid-flow-col gap-10">
       <SidebarWrapper>
         <PodcastSidebar
           title={podcast.name.label}
@@ -80,12 +80,16 @@ const PodcastDetailPage: FC = () => {
       <section id="episodes-list" className="flex flex-col flex-1 gap-4">
         {episodesCount ? (
           <h3 className="text-xl shadow-[0px_2px_5px_0px] shadow-gray-400 p-2 rounded-sm">Episodes: {episodesCount}</h3>
-        ) : null}
+        ) : (
+          <h3>Loading...</h3>
+        )}
         {podcastDetail.length ? (
           <div id="table-container" className="p-2 shadow-[0px_2px_5px_0px] shadow-gray-400 rounded-sm">
             <EpisodeTable podcastDetail={podcastDetail} onRowClick={handleRowClick} />
           </div>
-        ) : null}
+        ) : (
+          <h3>Loading...</h3>
+        )}
       </section>
     </div>
   );

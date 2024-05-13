@@ -15,7 +15,7 @@ const Header: FC<HeaderProps> = (props) => {
   const handleHeaderClick = () => navigate('/');
 
   return (
-    <header id="header" className="h-[50px] flex justify-between items-center mx-4 mt-2 pointer">
+    <header id="header" className="min-h-[50px] flex justify-between items-center mx-4 pointer">
       <div id="title" onClick={handleHeaderClick} className="cursor-pointer">
         <h1 className="text-xl text-[#8dafd3]">{title || 'Title'}</h1>
       </div>

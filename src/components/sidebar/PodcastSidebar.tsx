@@ -37,7 +37,7 @@ const PodcastSidebar: FC<PodcastSidebarProps> = (props) => {
   return (
     <div
       id="sidebar-content"
-      className="flex flex-col gap-4 pt-2  shadow-[0px_2px_5px_0px] shadow-gray-400 p-2 rounded-sm"
+      className="flex flex-col gap-4 shadow-[0px_2px_5px_0px] shadow-gray-400 py-4 px-2 rounded-sm"
     >
       <picture className={getPictureStyles(hasPodcastClick)} onClick={handlePodcastClick}>
         <img className="rounded-md aspect-square h-[200px]" src={cover} alt={title} />

@@ -19,12 +19,14 @@ const EpisodeDetailPage: FC = () => {
   const location = useLocation();
   const { podcast, episode } = location.state as EpisodeDetailLocationState;
 
-  console.log(podcast, episode);
+  console.log(episode);
 
   const handlePodcastClick = () => navigate(`/podcast/${podcastId}`, { state: { podcast } });
 
+  const descriptionPlaceholder = 'No description available';
+
   return (
-    <div id="episode" className="relative grid grid-flow-col gap-10">
+    <div id="episode-page" className="relative grid grid-flow-col gap-10">
       <SidebarWrapper>
         <PodcastSidebar
           title={podcast.name.label}
@@ -35,7 +37,18 @@ const EpisodeDetailPage: FC = () => {
         />
       </SidebarWrapper>
       <section id="episode-detail">
-        EpisodeDetail {podcastId} {episodeId}
+        {episode ? (
+          <div className="flex flex-col gap-4 p-4 shadow-[0px_2px_5px_0px] shadow-gray-400 rounded-sm">
+            <h3 className="text-xl font-bold">{episode.trackName}</h3>
+            <p>{episode.description || descriptionPlaceholder}</p>
+            <audio controls>
+              <source src={episode.episodeUrl} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        ) : (
+          <h3>Loading...</h3>
+        )}
       </section>
     </div>
   );
