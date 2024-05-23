@@ -1,10 +1,38 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import ReactDOM from 'react-dom/client';
+import Layout from './components/layout/Layout.tsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+import Main from './pages/MainPage.tsx';
+import PodcastDetail from './pages/PodcastDetailPage.tsx';
+import EpisodeDetailPage from './pages/EpisodeDetailPage.tsx';
+
+import './index.css';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <Layout>
+        <Main />
+      </Layout>
+    )
+  },
+  {
+    path: 'podcast/:podcastId',
+    element: (
+      <Layout>
+        <PodcastDetail />
+      </Layout>
+    )
+  },
+  {
+    path: '/podcast/:podcastId/episode/:episodeId',
+    element: (
+      <Layout>
+        <EpisodeDetailPage />
+      </Layout>
+    )
+  }
+]);
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);
